@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE j8583-config PUBLIC "-//J8583//DTD CONFIG 1.0//EN"
+	"http://j8583.sourceforge.net/j8583.dtd">
+<j8583-config> 
+    <!--Estructura del mensaje de tipo 0200-->
+        <template type="0200">
+            <!--<field num="18" type="NUMERIC" length="4">5960</field> -->
+        </template>
+     
+    <!--Estructura del mensaje de tipo 0210-->
+        <parse type="0210">
+            <field num="2" type="LLVAR"/>
+            <field num="3" type="NUMERIC" length="6" />
+            <field num="4" type="AMOUNT" />
+            <field num="7" type="DATE10" />
+            <field num="10" type="NUMERIC" length="8" />
+            <field num="11" type="NUMERIC" length="6" />
+            <field num="12" type="TIME" />
+            <field num="13" type="DATE4" />
+            <field num="17" type="DATE_EXP" />
+            <field num="32" type="LLVAR" />
+            <field num="37" type="ALPHA" length="12" />
+            <field num="38" type="ALPHA" length="6" />
+            <field num="39" type="ALPHA" length="2" />
+            <field num="41" type="ALPHA" length="8" />
+            <field num="48" type="LLLVAR" />
+            <field num="49" type="NUMERIC" length="3" />
+            <field num="54" type="LLLVAR" />
+            <field num="112" type="LLLVAR" />
+            <field num="121" type="LLLVAR" />
+            <field num="124" type="LLLVAR" />
+            <field num="125" type="LLLVAR" />
+            <field num="126" type="LLLVAR" />
+            <field num="127" type="LLLVAR" />
+            <field num="128" type="ALPHA" length="16" /> 
+        </parse>
+
+    <!--Estructura del mensaje de tipo 0400-->
+        <template type="0400">
+            <!--Parametros por default-->
+        </template>
+    
+    <!--Estructura del mensaje de tipo 0410-->
+        <parse type="0410">
+            <field num="2" type="LLVAR"/>
+            <field num="3" type="NUMERIC" length="6" />
+            <field num="4" type="AMOUNT" />
+            <field num="7" type="DATE10" />
+            <field num="11" type="NUMERIC" length="6" />
+            <field num="17" type="DATE_EXP" />
+            <field num="32" type="LLVAR" />
+            <field num="37" type="ALPHA" length="12" />
+            <field num="38" type="ALPHA" length="6" />
+            <field num="39" type="ALPHA" length="2" />
+            <field num="41" type="ALPHA" length="8" />
+            <field num="48" type="LLLVAR" />
+            <field num="49" type="NUMERIC" length="3" />
+            <field num="121" type="LLLVAR" />
+            <field num="124" type="LLLVAR" />
+            <field num="125" type="LLLVAR" />
+            <field num="126" type="LLLVAR" />
+            <field num="127" type="LLLVAR" />
+            <field num="128" type="ALPHA" length="16" />
+        </parse>
+    
+    <!--Estructura del mensaje de tipo 0420-->
+        <template type="0420">
+            <!--Parametros por default-->
+        </template>
+    
+    <!--Estructura del mensaje de tipo 0430-->
+        <parse type="0430">
+            <field num="2" type="LLVAR"/>
+            <field num="3" type="NUMERIC" length="6" />
+            <field num="4" type="AMOUNT" />
+            <field num="7" type="DATE10" />
+            <field num="11" type="NUMERIC" length="6" />
+            <field num="12" type="TIME" />
+            <field num="13" type="DATE4" />
+            <field num="17" type="DATE_EXP" />
+            <field num="32" type="LLVAR" />
+            <field num="39" type="ALPHA" length="2" />
+            <field num="48" type="LLLVAR" />
+            <field num="49" type="NUMERIC" length="3" />
+            <field num="112" type="LLLVAR" />
+            <field num="121" type="LLLVAR" />
+        </parse>
+    
+    <!--Estructura del mensaje de tipo 0800-->
+        <template type="0800">
+            <!--Parametros por default-->
+        </template>
+    
+    <!--Estructura del mensaje de tipo 0810-->
+        <parse type="0810">
+            <field num="7" type="DATE10" />
+            <field num="11" type="NUMERIC" length="6" />
+            <field num="33" type="LLVAR" />
+            <field num="39" type="ALPHA" length="2" />
+            <field num="70" type="ALPHA" length="3" />
+        </parse>
+		
+		<template type="0100">
+            <!--Parametros por default-->
+        </template>
+		
+		<parse type="0110">
+        <field num="2" type="LLVAR" />
+	<field num="3" type="NUMERIC" length="6" />
+	<field num="4" type="AMOUNT" />
+    <field num="5" type="NUMERIC" length="12" />
+	<field num="6" type="NUMERIC" length="12" />
+	<field num="7" type="ALPHA" length="10" />
+	<field num="9" type="NUMERIC" length="8" />
+	<field num="10" type="NUMERIC" length="8" />
+	<field num="11" type="NUMERIC" length="6" />
+	<field num="12" type="TIME" />
+	<field num="13" type="DATE4" />
+	<!-- BIT 14 SOPORTE PIN 2017-12-27-->
+	<field num="14" type="DATE4" />
+	<field num="15" type="DATE4" />
+	<field num="17" type="DATE_EXP" />
+	<field num="18" type="NUMERIC" length="4" />
+	<field num="22" type="NUMERIC" length="3" />
+	<field num="23" type="NUMERIC" length="3" />
+	<!-- SOPORTE BIT25 PIN 2017-12-27-->
+	<field num="25" type="NUMERIC" length="2" />
+	<field num="32" type="LLVAR" />
+	<field num="33" type="LLVAR" />
+	<field num="34" type="LLVAR" />
+	<field num="35" type="LLVAR" />
+	<field num="37" type="ALPHA" length="12" />
+	<field num="38" type="ALPHA" length="6" />
+	<field num="39" type="NUMERIC" length="2" />
+	
+	<field num="41" type="ALPHA" length="8" />
+	<field num="42" type="ALPHA" length="15" />
+	<field num="43" type="ALPHA" length="40" />
+	<!-- ERROR EN BIT44 PMP DICE: LLVAR-->
+	<field num="44" type="LLVAR" />
+	<field num="45" type="LLVAR" />
+	<field num="46" type="LLLVAR" />
+	<field num="47" type="LLLVAR" />
+	<field num="48" type="LLLVAR" />
+	<field num="49" type="NUMERIC" length="3" />
+	<field num="51" type="NUMERIC" length="3" />
+	<field num="50" type="NUMERIC" length="3" />
+	<!-- SOPORTE BIT52 PIN 2017-12-27-->
+	<field num="52" type="ALPHA" length="16" />
+	<!-- SOPORTE BIT53 PIN 2017-12-27-->
+	<field num="53" type="ALPHA" length="16" />
+	<field num="54" type="LLLVAR" />
+	<!-- ERROR EN BIT55 PMP DICE: LLVARHAY QUE CORREGIR-->
+	<field num="55" type="LLLVAR" />
+	<field num="60" type="LLLVAR" />
+
+	<field num="61" type="LLLVAR" />
+	<!-- ERROR EN BIT63 PMP  PDF DICE: LLVARHAY QUE CORREGIR-->
+	<field num="63" type="LLLVAR" />
+	
+	<!-- SOPORTE ECHO TEST 09-03-2018 -->
+	<field num="70" type="NUMERIC" length="3" />
+	
+	<field num="100" type="LLVAR" />
+	
+	
+	<field num="103" type="LLVAR" />
+	
+	<field num="102" type="LLVAR" />
+	<field num="112" type="LLLVAR" />
+	<field num="126" type="LLLVAR" />
+	<field num="127" type="LLLVAR" />
+	
+	
+        <field num="120" type="LLLVAR" />
+		<field num="121" type="LLLVAR" />
+	<field num="123" type="LLLVAR" />
+	<field num="124" type="LLLVAR" />
+
+</parse>
+</j8583-config>
