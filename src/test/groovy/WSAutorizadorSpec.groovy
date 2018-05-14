@@ -72,6 +72,7 @@ class WSAutorizadorSpec extends Specification {
             val[0] == 1
     }
 	
+	
 	void '18. consulta de saldo'() {
         given:
 			String request = builder.buildInputMessage(operation)
@@ -101,6 +102,168 @@ class WSAutorizadorSpec extends Specification {
         then:
 			response != null
 			resp[0..3] == '0110'
+			trama[2]?.value == '4230400000000014'
+			trama[39].value == '00'
+        
+	}
+	
+	
+	void '19. retiro por ATM'() {
+        given:
+			String request = builder.buildInputMessage(operation)
+			
+			IsoMessage iso = LectorBitmaps.generarTramaRetiro('4230400000000014',trace,20)
+			String tramaIn = new String(iso.writeData());
+			println tramaIn
+			
+			def slurper = new XmlSlurper().parseText(request)
+			slurper.Body.sendReceiveMsg.arg0 = "PMPVG"
+			//slurper.Body.sendReceiveMsg.arg1 = "0100723C460128E080001642304000000000140000000000000020001012232728010412103503121120125999051   06476134374581020000001260D221022615310375000007247160104122.8     CARD ACCEPTOR                                          604";
+			slurper.Body.sendReceiveMsg.arg1 = tramaIn
+			request = toPrettyXml(slurper)
+
+			//println request
+			
+			SoapClient client = SoapClient.builder()
+				.endpointUri(service)
+				.build();
+        when:
+			String response = client.post(request);
+			def Messages = new XmlSlurper().parseText(response)
+			String resp = Messages.Body.sendReceiveMsgResponse.return
+			println resp
+			
+			IsoMessage trama = LectorBitmaps.getTrama(resp)
+        then:
+			response != null
+			resp[0..3] == '0110'
+			trama[2]?.value == '4230400000000014'
+			trama[39].value == '00'
+        
+	}
+	
+	
+	void '20. compra por POS'() {
+        given:
+			String request = builder.buildInputMessage(operation)
+			
+			IsoMessage iso = LectorBitmaps.generarTramaCompra('4230400000000014',trace,15.50)
+			String tramaIn = new String(iso.writeData());
+			println tramaIn
+			
+			def slurper = new XmlSlurper().parseText(request)
+			slurper.Body.sendReceiveMsg.arg0 = "PMPVG"
+			//slurper.Body.sendReceiveMsg.arg1 = "0100723C460128E080001642304000000000140000000000000020001012232728010412103503121120125999051   06476134374581020000001260D221022615310375000007247160104122.8     CARD ACCEPTOR                                          604";
+			slurper.Body.sendReceiveMsg.arg1 = tramaIn
+			request = toPrettyXml(slurper)
+
+			//println request
+			
+			SoapClient client = SoapClient.builder()
+				.endpointUri(service)
+				.build();
+        when:
+			String response = client.post(request);
+			def Messages = new XmlSlurper().parseText(response)
+			String resp = Messages.Body.sendReceiveMsgResponse.return
+			println resp
+			
+			IsoMessage trama = LectorBitmaps.getTrama(resp)
+        then:
+			response != null
+			resp[0..3] == '0110'
+			trama[2]?.value == '4230400000000014'
+			trama[39].value == '00'
+        
+	}
+	
+	void '21. extorno operacion retiro'() {
+	    given:
+			String request = builder.buildInputMessage(operation)
+			
+			IsoMessage iso = LectorBitmaps.generarTramaRetiro('4230400000000014',trace,20)
+			String tramaIn = new String(iso.writeData());
+			println tramaIn
+			
+			def slurper = new XmlSlurper().parseText(request)
+			slurper.Body.sendReceiveMsg.arg0 = "PMPVG"
+			slurper.Body.sendReceiveMsg.arg1 = tramaIn
+			request = toPrettyXml(slurper)
+
+			//println request
+			
+			SoapClient client = SoapClient.builder()
+				.endpointUri(service)
+				.build();
+        when:
+			String response = client.post(request);
+			def Messages = new XmlSlurper().parseText(response)
+			String resp = Messages.Body.sendReceiveMsgResponse.return
+			println resp
+		and:
+			iso.type = LectorBitmaps.MSG_BYTE_400
+			tramaIn = new String(iso.writeData());
+			println tramaIn
+			
+			//slurper = new XmlSlurper().parseText(request)
+			//slurper.Body.sendReceiveMsg.arg0 = "PMPVG"
+			slurper.Body.sendReceiveMsg.arg1 = tramaIn
+			request = toPrettyXml(slurper)
+			
+			response = client.post(request);
+			Messages = new XmlSlurper().parseText(response)
+			resp = Messages.Body.sendReceiveMsgResponse.return
+			println resp
+			IsoMessage trama = LectorBitmaps.getTrama(resp)
+        then:
+			response != null
+			resp[0..3] == '0410'
+			trama[2]?.value == '4230400000000014'
+			trama[39].value == '00'
+        
+	}
+	
+	void '22. extorno operacion compra'() {
+	    given:
+			String request = builder.buildInputMessage(operation)
+			
+			IsoMessage iso = LectorBitmaps.generarTramaCompra('4230400000000014',trace,13)
+			String tramaIn = new String(iso.writeData());
+			println tramaIn
+			
+			def slurper = new XmlSlurper().parseText(request)
+			slurper.Body.sendReceiveMsg.arg0 = "PMPVG"
+			slurper.Body.sendReceiveMsg.arg1 = tramaIn
+			request = toPrettyXml(slurper)
+
+			//println request
+			
+			SoapClient client = SoapClient.builder()
+				.endpointUri(service)
+				.build();
+        when:
+			String response = client.post(request);
+			def Messages = new XmlSlurper().parseText(response)
+			String resp = Messages.Body.sendReceiveMsgResponse.return
+			println resp
+		and:
+			iso.type = LectorBitmaps.MSG_BYTE_400
+			tramaIn = new String(iso.writeData());
+			println tramaIn
+			
+			slurper = new XmlSlurper().parseText(request)
+			slurper.Body.sendReceiveMsg.arg0 = "PMPVG"
+			slurper.Body.sendReceiveMsg.arg1 = tramaIn
+			request = toPrettyXml(slurper)
+			
+			response = client.post(request);
+			Messages = new XmlSlurper().parseText(response)
+			resp = Messages.Body.sendReceiveMsgResponse.return
+			println resp
+			IsoMessage trama = LectorBitmaps.getTrama(resp)
+        then:
+			response != null
+			resp[0..3] == '0410'
 			trama[2]?.value == '4230400000000014'
 			trama[39].value == '00'
         

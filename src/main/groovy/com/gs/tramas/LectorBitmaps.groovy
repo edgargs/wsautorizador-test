@@ -18,7 +18,7 @@ public class LectorBitmaps {
         IsoMessage im;
         try {
             //mfact = ConfigParser.createDefault();
-            mfact = ConfigParser.createFromClasspathConfig("config.xml");
+            mfact = ConfigParser.createFromClasspathConfig(FILE_CONFIG);
             im = mfact.parseMessage(byteTramaOut ,0);
             imprimirVariablesParseadas(im);
         } catch (Exception e) {
@@ -38,6 +38,8 @@ public class LectorBitmaps {
 	
 	public static MessageFactory mfact;
 	static int MSG_BYTE_100 = 0X100;
+	static int MSG_BYTE_400 = 0X400;
+	static String FILE_CONFIG = "config8583_pmp.xml";
 	
 	public static IsoMessage generarTramaConsulta(String tarjeta, int trace) throws Exception{
 		leerConfiguracion();
@@ -78,8 +80,80 @@ public class LectorBitmaps {
 		return solic;
 	}
 	
+	public static IsoMessage generarTramaCompra(String tarjeta, int trace, double monto) throws Exception{
+		leerConfiguracion();
+		IsoMessage solic = mfact.newMessage(MSG_BYTE_100);
+		
+		solic[2] = IsoType.LLVAR(tarjeta, 16)
+		solic[3] = IsoType.NUMERIC(000000, 6)
+		solic[4] = IsoType.AMOUNT(monto)
+		solic[6] = IsoType.AMOUNT(monto) //CARDISS_AMOUNT
+		//bit7:[1012232728]
+		solic[11] = IsoType.NUMERIC(trace,6)
+		solic[12] = IsoType.TIME(new Date()) //[113622]
+		solic[13] = IsoType.DATE4(new Date()) //[1215]
+		solic[14] = IsoType.NUMERIC(2012,4)
+		solic[18] = IsoType.NUMERIC(5999,4) //MERCHANT
+		solic[22] = IsoType.NUMERIC(51,3) //POS_ENTRY_MODE
+		solic[23] = IsoType.NUMERIC(''   ,3)
+		solic[25] = IsoType.NUMERIC(51,2) //POS_COND_CODE
+		solic[32] = IsoType.LLVAR('476134')
+		//bit33:[null]
+		solic[35] = IsoType.LLVAR('4890680004356394D21042011393157500000')
+		solic[37] = IsoType.ALPHA("724716010412",12)
+		//bit39:[null]
+		solic[41] = IsoType.ALPHA("2.8     ",8)
+		solic[42] = IsoType.ALPHA("CARD ACCEPTOR  ",15)
+		solic[43] = IsoType.ALPHA("DISPENSADOR LOBBY........LIMA.........PE",40)
+		//bit45:[null]
+		//bit48:[null]
+		solic[49] = IsoType.NUMERIC(604,3)
+		solic[51] = IsoType.NUMERIC(604,3) //CUR_CODE_CARDISS
+		solic[60] = IsoType.LLLVAR('2500001000  ')
+
+		imprimirVariablesParseadas(solic)
+		
+		return solic;
+	}
+	
+	public static IsoMessage generarTramaRetiro(String tarjeta, int trace, double monto) throws Exception{
+		leerConfiguracion();
+		IsoMessage solic = mfact.newMessage(MSG_BYTE_100);
+		
+		solic[2] = IsoType.LLVAR(tarjeta, 16)
+		solic[3] = IsoType.NUMERIC(10000, 6)
+		solic[4] = IsoType.AMOUNT(monto)
+		solic[6] = IsoType.AMOUNT(monto) //CARDISS_AMOUNT
+		//bit7:[1012232728]
+		solic[11] = IsoType.NUMERIC(trace,6)
+		solic[12] = IsoType.TIME(new Date()) //[113622]
+		solic[13] = IsoType.DATE4(new Date()) //[1215]
+		solic[14] = IsoType.NUMERIC(2012,4)
+		solic[18] = IsoType.NUMERIC(5999,4) //MERCHANT
+		solic[22] = IsoType.NUMERIC(51,3) //POS_ENTRY_MODE
+		solic[23] = IsoType.NUMERIC(''   ,3)
+		solic[25] = IsoType.NUMERIC(51,2) //POS_COND_CODE
+		solic[32] = IsoType.LLVAR('476134')
+		//bit33:[null]
+		solic[35] = IsoType.LLVAR('4890680004356394D21042011393157500000')
+		solic[37] = IsoType.ALPHA("724716010412",12)
+		//bit39:[null]
+		solic[41] = IsoType.ALPHA("2.8     ",8)
+		solic[42] = IsoType.ALPHA("CARD ACCEPTOR  ",15)
+		solic[43] = IsoType.ALPHA("DISPENSADOR LOBBY........LIMA.........PE",40)
+		//bit45:[null]
+		//bit48:[null]
+		solic[49] = IsoType.NUMERIC(604,3)
+		solic[51] = IsoType.NUMERIC(604,3) //CUR_CODE_CARDISS
+		solic[60] = IsoType.LLLVAR('2500001000  ')
+
+		imprimirVariablesParseadas(solic)
+		
+		return solic;
+	}
+	
 	public static void leerConfiguracion() throws IOException{
-        mfact = ConfigParser.createFromClasspathConfig("config.xml");
+        mfact = ConfigParser.createFromClasspathConfig(FILE_CONFIG);
         mfact.setAssignDate(true);
         mfact.setTraceNumberGenerator(new SimpleTraceGenerator((int) (System.currentTimeMillis() % 100000)));
 	}
