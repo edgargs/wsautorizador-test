@@ -52,7 +52,7 @@ public class LectorBitmaps {
 		solic[11] = IsoType.NUMERIC(trace,6)
 		solic[12] = IsoType.TIME(new Date()) //[113622]
 		solic[13] = IsoType.DATE4(new Date()) //[1215]
-		solic[14] = IsoType.NUMERIC(2012,4)
+		solic[14] = IsoType.NUMERIC(2512,4)
 		solic[18] = IsoType.NUMERIC(6011,4)
 		solic[22] = IsoType.NUMERIC(51,3)
 		solic[23] = IsoType.NUMERIC(''   ,3)
@@ -92,7 +92,7 @@ public class LectorBitmaps {
 		solic[11] = IsoType.NUMERIC(trace,6)
 		solic[12] = IsoType.TIME(new Date()) //[113622]
 		solic[13] = IsoType.DATE4(new Date()) //[1215]
-		solic[14] = IsoType.NUMERIC(2012,4)
+		solic[14] = IsoType.NUMERIC(2512,4)
 		solic[18] = IsoType.NUMERIC(5999,4) //MERCHANT
 		solic[22] = IsoType.NUMERIC(51,3) //POS_ENTRY_MODE
 		solic[23] = IsoType.NUMERIC(''   ,3)
@@ -128,7 +128,7 @@ public class LectorBitmaps {
 		solic[11] = IsoType.NUMERIC(trace,6)
 		solic[12] = IsoType.TIME(new Date()) //[113622]
 		solic[13] = IsoType.DATE4(new Date()) //[1215]
-		solic[14] = IsoType.NUMERIC(2012,4)
+		solic[14] = IsoType.NUMERIC(2512,4)
 		solic[18] = IsoType.NUMERIC(5999,4) //MERCHANT
 		solic[22] = IsoType.NUMERIC(51,3) //POS_ENTRY_MODE
 		solic[23] = IsoType.NUMERIC(''   ,3)
